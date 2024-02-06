@@ -1,0 +1,240 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    },
+    {
+      "id": "0fca",
+      "email": "dumy@gmail.com",
+      "password": "password"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "login":{
+    "email": "dumy@mail.com",
+    "password": "password"
+  },
+  "product": [
+  {
+    "id": "1",
+    "name": "Paket A",
+    "internet": "10",
+    "tiktok": "1",
+    "youtube": "1",
+    "instagram": "2",
+    "price": 150000,
+    "period": "Month"
+  },
+  {
+    "id": "2",
+    "name": "Paket B",
+    "internet": "15",
+    "tiktok": "3",
+    "youtube": "2",
+    "instagram": "4",
+    "price": 250000,
+    "period": "Day"
+  },
+  {
+    "id": "3",
+    "name": "Paket C",
+    "internet": "20",
+    "tiktok": "4",
+    "youtube": "3",
+    "instagram": "5",
+    "price": 350000,
+    "period": "Week"
+  },
+    {
+    "id": "4",
+    "name": "Paket D",
+    "internet": "8",
+    "tiktok": "2",
+    "youtube": "1",
+    "instagram": "3",
+    "price": 180000,
+    "period": "Month"
+  },
+  {
+    "id": "5",
+    "name": "Paket E",
+    "internet": "18",
+    "tiktok": "5",
+    "youtube": "4",
+    "instagram": "6",
+    "price": 300000,
+    "period": "Day"
+  },
+  {
+    "id": "6",
+    "name": "Paket F",
+    "internet": "25",
+    "tiktok": "3",
+    "youtube": "3",
+    "instagram": "4",
+    "price": 400000,
+    "period": "Week"
+  },
+  {
+    "id": "7",
+    "name": "Paket G",
+    "internet": "14",
+    "tiktok": "2",
+    "youtube": "2",
+    "instagram": "1",
+    "price": 220000,
+    "period": "Month"
+  },
+  {
+    "id": "8",
+    "name": "Paket H",
+    "internet": "12",
+    "tiktok": "3",
+    "youtube": "3",
+    "instagram": "5",
+    "price": 280000,
+    "period": "Day"
+  },
+  {
+    "id": "9",
+    "name": "Paket I",
+    "internet": "22",
+    "tiktok": "4",
+    "youtube": "2",
+    "instagram": "4",
+    "price": 360000,
+    "period": "Week"
+  },
+  {
+    "id": "10",
+    "name": "Paket J",
+    "internet": "16",
+    "tiktok": "1",
+    "youtube": "3",
+    "instagram": "2",
+    "price": 240000,
+    "period": "Month"
+  },
+   {
+    "id": "11",
+    "name": "Paket K",
+    "internet": "19",
+    "tiktok": "2",
+    "youtube": "1",
+    "instagram": "4",
+    "price": 280000,
+    "period": "Day"
+  },
+  {
+    "id": "12",
+    "name": "Paket L",
+    "internet": "14",
+    "tiktok": "3",
+    "youtube": "2",
+    "instagram": "3",
+    "price": 220000,
+    "period": "Week"
+  },
+  {
+    "id": "13",
+    "name": "Paket M",
+    "internet": "10",
+    "tiktok": "4",
+    "youtube": "3",
+    "instagram": "5",
+    "price": 150000,
+    "period": "Month"
+  },
+  {
+    "id": "14",
+    "name": "Paket N",
+    "internet": "17",
+    "tiktok": "2",
+    "youtube": "4",
+    "instagram": "2",
+    "price": 260000,
+    "period": "Day"
+  },
+  {
+    "id": "15",
+    "name": "Paket O",
+    "internet": "21",
+    "tiktok": "3",
+    "youtube": "3",
+    "instagram": "1",
+    "price": 340000,
+    "period": "Week"
+  },
+  {
+    "id": "16",
+    "name": "Paket P",
+    "internet": "13",
+    "tiktok": "1",
+    "youtube": "2",
+    "instagram": "4",
+    "price": 200000,
+    "period": "Month"
+  },
+  {
+    "id": "17",
+    "name": "Paket Q",
+    "internet": "15",
+    "tiktok": "4",
+    "youtube": "1",
+    "instagram": "3",
+    "price": 250000,
+    "period": "Day"
+  },
+  {
+    "id": "18",
+    "name": "Paket R",
+    "internet": "18",
+    "tiktok": "3",
+    "youtube": "3",
+    "instagram": "5",
+    "price": 300000,
+    "period": "Week"
+  },
+  {
+    "id": "19",
+    "name": "Paket S",
+    "internet": "22",
+    "tiktok": "2",
+    "youtube": "2",
+    "instagram": "1",
+    "price": 360000,
+    "period": "Month"
+  },
+  {
+    "id": "20",
+    "name": "Paket T",
+    "internet": "16",
+    "tiktok": "3",
+    "youtube": "4",
+    "instagram": "2",
+    "price": 240000,
+    "period": "Day"
+  }
+]
+}
