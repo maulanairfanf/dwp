@@ -1,23 +1,31 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, Slider, Stack, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
 function Filter() {
   const [sort, setSort] = useState('')
   const [priceRange, setPriceRange] = useState(0)
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSort(event.target.value)
-    setSearchParams({sort : event.target.value, 'price-range' : priceRange, name: query})
-
+    // setSearchParams({sort : event.target.value, 'price-range' : priceRange, name: query})
+    navigate({
+      pathname: '/',
+      search: `?${createSearchParams({sort : event.target.value, 'price-range' : priceRange, name: query})}`
+    })
   }
 
   const handlePriceRange = (event, value) => {
     setPriceRange(value)
-    setSearchParams({sort : sort, 'price-range' : value, name: query })
-
+    // setSearchParams({sort : sort, 'price-range' : value, name: query })
+    navigate({
+      pathname: '/',
+      search:`?${createSearchParams({sort : sort, 'price-range' : value, name: query })}`
+      
+    })
   }
 
   useEffect(() => {

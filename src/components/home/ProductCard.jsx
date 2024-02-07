@@ -1,9 +1,37 @@
-import { Box, Button, Card, CardActions, Divider, List, ListItem, Typography } from "@mui/material";
-import LanguageIcon from '@mui/icons-material/Language';
+import { Alert, Box, Button, Card, CardActions, Divider, List, ListItem, Snackbar, Typography } from "@mui/material";
+import { Language } from "@mui/icons-material";
 import PropTypes from 'prop-types';
 import { rupiah } from "../../utils/currency"; 
+import { generateId, generateDate } from "../../utils/postProduct";
+import fetch from "../../hooks/use-fetch";
+import { useState } from "react";
 
 export default function ProductCard({item}) {
+  const [open, setOpen] = useState(false)
+
+  async function handleBuy () {
+    const params = {
+      id: generateId(),
+      product: item,
+      created_at: generateDate()
+    }
+    try {
+      const response = await fetch.post('/transaction', params)
+      if (response) {
+        setOpen(true)
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <Box
       sx={{
@@ -21,7 +49,7 @@ export default function ProductCard({item}) {
         <List size="sm" >
           <ListItem sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <LanguageIcon fontSize="small" />
+              <Language fontSize="small" />
               <Typography display="block" >
                 Internet
               </Typography>
@@ -32,7 +60,7 @@ export default function ProductCard({item}) {
           </ListItem>
          <ListItem sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <LanguageIcon fontSize="small" />
+              <Language fontSize="small" />
               <Typography display="block" >
                 Tiktok
               </Typography>
@@ -43,7 +71,7 @@ export default function ProductCard({item}) {
           </ListItem>
           <ListItem sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <LanguageIcon fontSize="small" />
+              <Language fontSize="small" />
               <Typography display="block" >
                 Youtube
               </Typography>
@@ -54,7 +82,7 @@ export default function ProductCard({item}) {
           </ListItem>
           <ListItem sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <LanguageIcon fontSize="small" />
+              <Language fontSize="small" />
               <Typography display="block" >
                 Instagram
               </Typography>
@@ -72,11 +100,26 @@ export default function ProductCard({item}) {
           <Button
             variant="contained"
             color="primary"
+            onClick={handleBuy}
           >
             Beli
           </Button>
         </CardActions>
       </Card>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          Success Buy
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

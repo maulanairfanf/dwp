@@ -1,38 +1,53 @@
 import { AppBar, Avatar, Box, Button, Container, Divider, IconButton, ListItemIcon, Menu, MenuItem, TextField, Toolbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout,  ReceiptLong } from '@mui/icons-material';
+import { useAuth } from '../../hooks/use-auth';
 export default function MainLayout () {
-  const pages = ['Home', 'Products'];
+  const pages = ['Home'];
   const [anchorMenu, setAnchorMenu] = useState(null);
   const [anchorAvatar, setAnchorAvatar] = useState(null);
   const open = Boolean(anchorAvatar);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [sort, setSort] = useState('')
   const [priceRange, setPriceRange] = useState('')
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleClick = (event) => {
     setAnchorAvatar(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (route) => {
     setAnchorAvatar(null);
+    console.log('route', route)
+    if (route) navigate('/' + route)
+
   };
 
   const handleOpenNavMenu = (event) => {
     setAnchorMenu(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (route) => {
     setAnchorMenu(null);
+    if (route === 'Home') navigate('/')
   };
 
    const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      setSearchParams({sort : sort, 'price-range' : priceRange, name: event.target.value })
+      navigate({
+        pathname: '/',
+        search: `?${createSearchParams({sort : sort, 'price-range' : priceRange, name: event.target.value })}`
+
+      })
     }
   };
+
+  const handleLogout = () => {
+    auth.signOut()
+  }
   
 
   useEffect(() => {
@@ -74,7 +89,7 @@ export default function MainLayout () {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -88,7 +103,7 @@ export default function MainLayout () {
                 {pages.map((page) => (
                   <Button
                     key={page}
-                    onClick={handleCloseNavMenu}
+                    onClick={() => handleCloseNavMenu(page)}
                     sx={{ my: 2, color: 'black', display: 'block' }}
                   >
                     {page}
@@ -119,8 +134,8 @@ export default function MainLayout () {
                 anchorEl={anchorAvatar}
                 id="account-menu"
                 open={open}
-                onClose={handleClose}
-                onClick={handleClose}
+                onClose={() => handleClose()}
+                onClick={() => handleClose()}
                 PaperProps={{
                   elevation: 0,
                   sx: {
@@ -150,17 +165,11 @@ export default function MainLayout () {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={() => handleClose('profile')}>
                 <Avatar /> Profile
               </MenuItem>
               <Divider />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <ReceiptLong fontSize="small" />
-                </ListItemIcon>
-                Transaction
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
                 </ListItemIcon>

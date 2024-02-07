@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import fetch from '../hooks/use-fetch';
 import { TOKEN } from '../constant/auth';
-import { redirect } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const HANDLERS = {
   SIGN_IN: 'SIGN_IN',
@@ -23,14 +23,16 @@ const handlers = {
     return {
       ...state,
       isAuthenticated: true,
-      token: token
+      token: token,
+      isLoading: false
     };
   },
   [HANDLERS.SIGN_OUT]: (state) => {
     return {
       ...state,
       isAuthenticated: false,
-      token: null
+      token: null,
+      isLoading: false
     };
   }
 };
@@ -47,15 +49,14 @@ export const AuthProvider = (props) => {
   const cookie = new Cookies();
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate()
 
   const initialize = async () => {
     let isAuthenticated = false;
     const token = cookie.get(TOKEN, {path: '/'})
     if (token) {
       isAuthenticated = true
-      redirect('/home')
     } 
-    else redirect('/signin')
 
     if (isAuthenticated) {
       dispatch({
@@ -66,8 +67,8 @@ export const AuthProvider = (props) => {
       dispatch({
         type: HANDLERS.SIGN_OUT
       });
-      }
-    };
+    }
+  };
 
   useEffect(
     () => {
@@ -87,7 +88,7 @@ export const AuthProvider = (props) => {
             token: token
           });
           cookie.set(TOKEN, token, { path: '/' });
-          return redirect('/home')
+          return navigate('/')
         } else {
           throw new Error('Please check your email and password');
         }

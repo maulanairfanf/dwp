@@ -1,14 +1,11 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/use-auth';
 
 export default function GuestRoute({ children }) {
   const { isAuthenticated } = useAuth();
 
-  if (isAuthenticated) return <Navigate to="/" replace={true} /> 
-
-
-  return children || <Outlet />
+  return isAuthenticated ? <Navigate to="/" replace={true} /> : children
 }
 
 GuestRoute.propTypes = {

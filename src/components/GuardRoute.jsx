@@ -1,14 +1,11 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/use-auth';
 
 export default function GuardRoute({ children }) {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) return <Navigate to="/signin" replace={true} /> 
-
-
-  return children || <Outlet />
+  return isAuthenticated ? children : <Navigate to="/signin" replace={true} /> 
 }
 
 GuardRoute.propTypes = {

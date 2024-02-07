@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useAuth } from '../../hooks/use-auth';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Page = () => {
   const auth = useAuth();
@@ -16,13 +16,14 @@ const Page = () => {
   const [error, setError] = useState('')
   const [email, setEmail] = useState('dumy@mail.com')
   const [password, setPassword] = useState('password')
+  const navigate = useNavigate()
   async function handleSubmit (e) {
     setIsloading(true)
     e.preventDefault()
 
     try {
       await auth.signIn(email, password)
-      redirect('/')
+      navigate('/')
     } catch (error) {
       console.log('error', error.message)
       setError(error.message)
