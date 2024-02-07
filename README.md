@@ -1,8 +1,17 @@
-# React + Vite
+# Getting Started
+Clone Project 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Step 1: Start the json-server
+```bash
+# using npm
+npx json-server db.json
+```
 
-Currently, two official plugins are available:
+## Step 2: Start Application
+```bash
+# using npm
+npx run start
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Step 3: Open Application
+You can open this link "http://localhost:5173/"
