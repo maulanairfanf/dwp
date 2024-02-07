@@ -22,7 +22,7 @@ const Page = () => {
 
     try {
       await auth.signIn(email, password)
-      redirect('/home')
+      redirect('/')
     } catch (error) {
       console.log('error', error.message)
       setError(error.message)

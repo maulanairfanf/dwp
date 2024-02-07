@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/use-auth';
 export default function GuestRoute({ children }) {
   const { isAuthenticated } = useAuth();
 
-  if (isAuthenticated) return <Navigate to="/home" replace={true} /> 
+  if (isAuthenticated) return <Navigate to="/" replace={true} /> 
 
 
   return children || <Outlet />

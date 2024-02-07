@@ -28,7 +28,7 @@ export default function App() {
             </GuardRoute>
           }
         >
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
         </Route>
       </Routes>
     </AuthProvider>

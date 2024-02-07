@@ -1,31 +1,44 @@
-import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, TextField, Toolbar, Typography } from '@mui/material';
-import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { AppBar, Avatar, Box, Button, Container, Divider, IconButton, ListItemIcon, Menu, MenuItem, TextField, Toolbar, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { deepOrange } from '@mui/material/colors';
-
+import { Logout,  ReceiptLong } from '@mui/icons-material';
 export default function MainLayout () {
-  const pages = ['Products', 'Pricing', 'Blog'];
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const navigate = useNavigate();
+  const pages = ['Home', 'Products'];
+  const [anchorMenu, setAnchorMenu] = useState(null);
+  const [anchorAvatar, setAnchorAvatar] = useState(null);
+  const open = Boolean(anchorAvatar);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sort, setSort] = useState('')
+  const [priceRange, setPriceRange] = useState('')
+
+  const handleClick = (event) => {
+    setAnchorAvatar(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorAvatar(null);
+  };
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+    setAnchorMenu(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setAnchorMenu(null);
   };
 
    const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      console.log('e.target.value', event.target.value)
-      navigate({
-        pathname: "home",
-        search: `?name=${event.target.value}`
-      })
+      setSearchParams({sort : sort, 'price-range' : priceRange, name: event.target.value })
     }
   };
+  
+
+  useEffect(() => {
+    if (searchParams.get('price-range')) setPriceRange(searchParams.get('price-range'))
+    if (searchParams.get('sort')) setSort(searchParams.get('sort'))
+  },[searchParams])
   return (
     <>
       <AppBar position="static" sx={{ bgcolor:"white"}} >
@@ -44,7 +57,7 @@ export default function MainLayout () {
               </IconButton>
               <Menu
                 id="menu-appbar"
-                anchorEl={anchorElNav}
+                anchorEl={anchorMenu}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'right',
@@ -54,7 +67,7 @@ export default function MainLayout () {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                open={Boolean(anchorElNav)}
+                open={Boolean(anchorMenu)}
                 onClose={handleCloseNavMenu}
                 sx={{
                   display: { xs: 'block', md: 'none' },
@@ -81,9 +94,79 @@ export default function MainLayout () {
                     {page}
                   </Button>
                 ))}
-                <Avatar sx={{ bgcolor: deepOrange[500], width: 24, height: 24 }} sizes='sm'>N</Avatar>
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 1 }}
+                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                >
+                  <Avatar sx={{ width: 24, height: 24 }}>M</Avatar>
+                </IconButton>
               </Box>
-              <Avatar sx={{ display: { md: 'none' }, bgcolor: deepOrange[500], width: 24, height: 24 }} sizes='sm'>N</Avatar>
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 1, display: { md: 'none' } }}
+                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                >
+                  <Avatar sx={{ width: 24, height: 24 }}>M</Avatar>
+                </IconButton>
+               <Menu
+                anchorEl={anchorAvatar}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+              <MenuItem onClick={handleClose}>
+                <Avatar /> Profile
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <ReceiptLong fontSize="small" />
+                </ListItemIcon>
+                Transaction
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
+              </MenuItem>
+            </Menu>
             </Box>
           </Toolbar>
         </Container>

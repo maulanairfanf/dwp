@@ -1,36 +1,16 @@
 {
-  "posts": [
+  "transaction": [
     {
       "id": "1",
-      "title": "a title",
-      "views": 100
-    },
-    {
-      "id": "2",
-      "title": "another title",
-      "views": 200
-    },
-    {
-      "id": "0fca",
-      "email": "dumy@gmail.com",
-      "password": "password"
+      "name": "Paket A",
+      "internet": "10",
+      "tiktok": "1",
+      "youtube": "1",
+      "instagram": "2",
+      "price": 150000,
+      "period": "Month"
     }
   ],
-  "comments": [
-    {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "login":{
     "email": "dumy@mail.com",
     "password": "password"
