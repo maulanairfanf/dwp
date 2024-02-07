@@ -1,5 +1,20 @@
 {
-  "transaction": [],
+  "transaction": [
+    {
+      "id": "o8qe5b",
+      "product": {
+        "id": "2",
+        "name": "Paket B",
+        "internet": "15",
+        "tiktok": "3",
+        "youtube": "2",
+        "instagram": "4",
+        "price": 250000,
+        "period": "Day"
+      },
+      "created_at": "07/02/2024"
+    }
+  ],
   "login": {
     "email": "dumy@mail.com",
     "password": "password"

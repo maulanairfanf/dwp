@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import fetch from '../hooks/use-fetch';
@@ -123,5 +123,3 @@ AuthProvider.propTypes = {
 };
 
 export const AuthConsumer = AuthContext.Consumer;
-
-export const useAuthContext = () => useContext(AuthContext);
