@@ -8,7 +8,7 @@ npx json-server db.json
 
 ## Step 2: Start Application
 ```bash
-npx run start
+npm run start
 ```
 
 ## Step 3: Open Application
